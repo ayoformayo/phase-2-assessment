@@ -1,0 +1,12 @@
+<form action="/create_event" method='post'>
+  <label for="event[name]">Event Name</label>
+  <input type="text" name='event[name]'>
+  <label for="event[location]">Event Location</label>
+  <input type="text" name='event[location]'>
+  <label for="event[starts_at]">Event Starts</label>
+  <input type="text" name='event[starts_at]'>
+  <label for="event[ends_at]">Event Ends</label>
+  <input type="text" name='event[ends_at]'>
+  <input type="hidden" value='<%=@user.id%>' name='event[user_id]'>
+  <input type="submit" value='Submit'>
+</form>

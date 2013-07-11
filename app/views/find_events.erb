@@ -1,0 +1,10 @@
+<div id='find_events'>
+  <% @events.each do |event| %>
+  <% p event.id %>
+    <span>Name: <%=event.name%> | Location: <%=event.location%> | Starts: <%=event.starts_at  %></span><form action="/find_event" method='post'>
+    <input type="hidden" name='event[user_id]' value='<%=@user.id%>'>
+    <input type="hidden" name='event[event_id]' value='<%=event.id%>'>
+      <input type="submit" value='Submit!'>
+    </form>
+  <% end %>
+</div>

@@ -1,23 +1,30 @@
 <div class="container">
-  <h1>Welcome to Sinatra!</h1>
-  <p>Hello, world!</p>
-
-  <table>
-    <tr>
-      <th>File Description</th>
-      <th>File Location</th>
-    </tr>
-    <tr>
-      <td>This view file</td>
-      <td><code><%= __FILE__.gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The layout file</td>
-      <td><code><%= File.expand_path('../layout.erb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The current controller</td>
-      <td><code><%= File.expand_path('../../controllers/index.rb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-  </table>
+  <h1>EVENT PLANNER FTFW</h1>
+<a href="sign_in">Sign In</a>
+<a href="sign_up">Sign Up</a>
+<% if session[:logged_in] %>
+<form action="/logout" method='post'>
+  <input type="submit" value='Logout!'>
+</form>
+<div id='user_events'>
+  <h1><%=@user.email%></h1>
+  <h3>Created events</h3>
+  <%@user.created_events.each do |event|  %>
+  <span>Name: <%=event.name%> | Location: <%=event.location%> | Starts: <%=event.starts_at  %></span> <br>
+  <span><a href="/edit_event/<%=event.id%>">Edit Event</a> | <form action="/delete_event" method='post'>
+    <input type="hidden" name = 'event[id]'value="<%=event.id%>">
+    <input type="submit" value='Delete Event'>
+  </form> </span><br>
+  <% end %>
+  <br>
+  <h3>Attending events</h3>
+  <%@user.attended_events.each do |event|  %>
+  <span>Name: <%=event.name%> | Location: <%=event.location%> | Starts: <%=event.starts_at  %></span>
+  <% end %>
+  <br>
+  <a href="/create_event">Create Event!</a>
+  <br>
+  <a href="/find_event">Find an Event!</a>
+</div>
+<% end %>
 </div>
